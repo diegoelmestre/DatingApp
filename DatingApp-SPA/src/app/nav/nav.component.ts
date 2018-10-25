@@ -19,7 +19,7 @@ export class NavComponent implements OnInit {
       console.log('Logged in Sucessfully');
       console.log(localStorage.getItem('token'));
     }, error => {
-      console.log('Failed to login');
+      console.log(error);
     });
   }
 
