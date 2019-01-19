@@ -145,7 +145,7 @@ namespace DatingApp.API.Controllers
                 var result = _cloudinary.Destroy(deletionParams);
 
                 if (result.Result == "ok")
-                {
+                {   
                     _repo.Delete(photoFromRepo);
                 }
 
