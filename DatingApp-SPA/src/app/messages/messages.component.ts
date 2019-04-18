@@ -16,10 +16,12 @@ export class MessagesComponent implements OnInit {
   pagination: Pagination;
   messageContainer = 'Unread';
 
-  constructor(private userService: UserService,
-              private authService: AuthService,
-              private route: ActivatedRoute,
-              private alertify: AlertifyService) { }
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private alertify: AlertifyService
+  ) {}
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -29,17 +31,39 @@ export class MessagesComponent implements OnInit {
   }
 
   loadMessages() {
-    this.userService.getMessages(this.authService.decodedToken.nameid,
-                                 this.pagination.currentPage,
-                                 this.pagination.itemsPerPage,
-                                 this.messageContainer)
-                      .subscribe((res: PaginatedResult<Message[]>) => {
-                        this.messages = res.result;
-                        this.pagination = res.pagination;
-                      }, error => {
-                        this.alertify.error(error);
-                      }
-                      );
+    this.userService
+      .getMessages(
+        this.authService.decodedToken.nameid,
+        this.pagination.currentPage,
+        this.pagination.itemsPerPage,
+        this.messageContainer
+      )
+      .subscribe(
+        (res: PaginatedResult<Message[]>) => {
+          this.messages = res.result;
+          this.pagination = res.pagination;
+        },
+        error => {
+          this.alertify.error(error);
+        }
+      );
+  }
+
+  deleteMessage(id: number) {
+    this.alertify.confirm(
+      'Are you sure you want to delete this message?',
+      () => {
+        debugger;
+        this.userService
+          .deleteMessage(id, this.authService.decodedToken.nameid)
+          .subscribe(() => {
+            this.messages.splice(this.messages.findIndex(m => m.id === id), 1);
+            this.alertify.sucess('Message has been deleted');
+          }, error => {
+            this.alertify.error('Failed to delete the message');
+          });
+      }
+    );
   }
 
   pageChanged(event: any): void {
