@@ -6,4 +6,5 @@ https://datingapp-apa.azurewebsites.net/
 
 # User/Password
 lola/password
-<user>/password
+
+all_users/password
