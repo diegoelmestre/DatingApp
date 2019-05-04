@@ -4,6 +4,6 @@ Udemy Course .Net Core + Angular - https://www.udemy.com/build-an-app-with-aspne
 # URL
 https://datingapp-apa.azurewebsites.net/
 
-#User/Password
+# User/Password
 lola/password
 <user>/password
