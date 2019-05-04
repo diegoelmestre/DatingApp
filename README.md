@@ -8,3 +8,6 @@ https://datingapp-apa.azurewebsites.net/
 lola/password
 
 all_users/password
+
+# NOTES
+Bonus Lesson 20 (Identity Managment) still to do
